@@ -1,0 +1,8 @@
+cl=$(docker ps --format {{.Names}})
+for d in $cl; do
+ nexthop=$(docker exec -it $d ip route | grep default | cut -d' ' -f 3)
+ interface=$(docker exec -it $d ip route | grep default | cut -d' ' -f 5)
+ #docker exec -it $d ip route change default via $nexthop dev $interface advmss 1340
+ #docker exec -it $d ip route
+ curl -I https://packages.cloud.google.com | grep 200
+done;
